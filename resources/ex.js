@@ -21,12 +21,12 @@ readFile("help.txt", "utf-8", function (err, data) {
   console.log(data);
 });
 
-// mkdir("dir2", (err) => {
-//   if (err) {
-//     console.log(err);
-//   }
-//   console.log("dir is formed");
-// });
+mkdir("dir2", (err) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log("dir is formed");
+});
 
 rmdir("dir2", (err) => {
   if (err) {
@@ -44,24 +44,33 @@ const extension = path.extname(p);
 console.log(dirname);
 console.log(extension);
 
-
-
-// Get the path of the folder
 const folderPath = path.dirname(p);
 console.log(folderPath);
 
-// Get the path of the file
 const filePath = path.basename(p);
 console.log(filePath);
 
-// Copy the file from source to destination
-const sourcePath = "C:UsersDharmMusic\react-nexus\resources\file.txt";
-const destinationPath = "/destination/file.txt";
+const sourcePath = "C:UsersDharmMusic\react-nexus\resourceshelp.txt";
+const destinationPath = "C:UsersDharmMusic\react-nexus\resourcesdir";
 
-fs.copyFile(sourcePath, destinationPath, (err) => {
+copyFile(sourcePath, destinationPath, (err) => {
   if (err) {
     console.log(err);
   } else {
     console.log("File copied successfully");
   }
 });
+
+const copyFile = (source, destination, cb) => {
+  readFile(source, "utf-8", (err, data) => {
+    if (err) {
+      return cb(err);
+    }
+    writeFile(destination, data, (err) => {
+      if (err) {
+        return cb(err);
+      }
+      cb(null);
+    });
+  });
+}
