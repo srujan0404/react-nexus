@@ -1,1 +1,1 @@
-async functions vs sync functions
+async functions vs sync functionsclass is going onclass is going on
